@@ -1,6 +1,7 @@
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
+        //Part 1: Sorting Arrays
         //Creating two-dimensional array in order by state name for 50 States and their capitals
         String[][] statesAndCapitals = new String[][]{
                 {"Alabama", "Montgomery"},
@@ -67,8 +68,50 @@ public class Main {
         //Finally, display the final score
         System.out.println("You got "+count+" capitals correct!");
 
+
+        //Part 2: Sorting & Searching HashMap
+        Map<String, String> statesAndCapitalsMap = new HashMap<>();
+        for (String[] stateAndCapital : statesAndCapitals) {
+            statesAndCapitalsMap.put(stateAndCapital[0], stateAndCapital[1]);
+        }
+
+        //Display the content of the Map
+        System.out.println("\nStates and Capitals using Map:");
+        for (Map.Entry<String, String> entry : statesAndCapitalsMap.entrySet()) {
+            System.out.println(entry.getKey() + " - " + entry.getValue());
+        }
+
+        //Sort the map using TreeMap (binary search tree)
+        Map<String, String> sortedStatesAndCapitalsMap = new TreeMap<>(statesAndCapitalsMap);
+
+        //Ask user to enter a state to display the capital
+        Scanner scanner = new Scanner(System.in);
+
+        //Loop to search for capitals based on user state input
+        boolean exitLoop = false;
+        while (!exitLoop) {
+            //Prompt user to enter a state to display the capital
+            System.out.print("\nEnter a state to find its capital or type 'exit' to quit: ");
+            String state = scanner.nextLine().trim();
+
+            if (state.equalsIgnoreCase("exit")) {
+                exitLoop = true;
+            } else {
+                if (sortedStatesAndCapitalsMap.containsKey(state)) {
+                    String capital = sortedStatesAndCapitalsMap.get(state);
+                    System.out.println("Capital of " + state + " is " + capital);
+                } else {
+                    System.out.println("Sorry, this state doesn't exist.");
+                }
+            }
+        }
+
+        System.out.println("Exiting the program.");
     }
-    //Creating methods called in main
+
+
+    
+    //Part 1 continues: creating methods called in main
 
     //Displaying method
     public static void displayStatesAndCapitals(String[][] statesAndCapitals){
